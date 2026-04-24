@@ -15,7 +15,7 @@ def func(arr: list):
         current_num = arr[i]
         num_match = target - current_num
 
-        for j in range(len(arr)):
+        for j in range(i+1, len(arr)):
             num_compare = arr[j]
 
             # no match.
