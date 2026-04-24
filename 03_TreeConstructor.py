@@ -28,3 +28,4 @@ def TreeConstructor(strArr):
 
 # keep this function call here 
 print(TreeConstructor(["(1,2)", "(2,4)", "(5,7)", "(7,2)", "(9,5)"]))
+print(TreeConstructor(["(1,2)", "(3,2)", "(4,2)"]))
