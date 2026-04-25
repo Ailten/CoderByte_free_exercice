@@ -39,8 +39,6 @@ def func(arr):
 #print(func(['3', 'A', 'B', 'C', 'A-B', 'B-A', 'B-C']))
 
 
-
-
 # --- TEST CASES ---
 
 # Test 1: Chemin direct et simple
@@ -50,7 +48,6 @@ print(func(["5", "A", "B", "C", "D", "E", "A-B", "A-C", "B-C", "C-D", "D-E"]))
 # Test 2: Plusieurs chemins, le BFS trouvera le plus court
 print(func(["4", "X", "Y", "W", "Z", "X-Y", "Y-W", "W-Z"]))
 # Srtie attendue: "X-Y-W-Z"
-
 
 # Test 3: Aucun chemin possible
 print(func(["4", "A", "B", "C", "D", "A-B", "C-D"]))
