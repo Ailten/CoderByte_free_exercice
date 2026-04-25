@@ -17,4 +17,4 @@ print(simplePatern('abc'))
 print(simplePatern('+a+b+++c+'))
 print(simplePatern('$*-_+a+__-'))
 print(simplePatern('-a-'))
-print(simplePatern('---'))
+print(simplePatern('---'))  # don't know why case it supored to be return (do an exeption if it's not what expect, in my case return True).
