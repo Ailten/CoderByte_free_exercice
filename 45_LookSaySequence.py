@@ -33,9 +33,5 @@ def lookSaySequence(num):
         
 
 
-
-
-
-
 print(lookSaySequence(1))
 print(lookSaySequence(221))
