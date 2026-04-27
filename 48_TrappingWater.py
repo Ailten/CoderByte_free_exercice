@@ -41,5 +41,5 @@ def trappingWater(arr):
 
 
 print(trappingWater([3,0,1,0,2,0,1]))  # 6.
-print(trappingWater([3,0,1,0,2,0,0,1]))
-print(trappingWater([3,0,1,0,2,0,0,3]))
+print(trappingWater([3,0,1,0,2,0,0,1]))  # 7.
+print(trappingWater([3,0,1,0,2,0,0,3]))  # 15
