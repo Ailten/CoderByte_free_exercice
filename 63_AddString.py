@@ -53,7 +53,7 @@ class Solution:
 
 
 
-    def addStr(num1: str, num2: str) -> str:
+    def addStr(self, num1: str, num2: str) -> str:
         # adition string.
         output = ''
         rest = 0

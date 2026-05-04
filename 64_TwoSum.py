@@ -7,7 +7,7 @@
 
 # my first proposition.
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
         
         for i in range(len(nums) -1):
             val = nums[i]
@@ -21,7 +21,7 @@ class Solution:
 
 # solution optimal, who loop one time and stock previous value (in a dictionary), with the dif value as index (to find by the second element).
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
         seen = {}
 
         for i, n in enumerate(nums):
