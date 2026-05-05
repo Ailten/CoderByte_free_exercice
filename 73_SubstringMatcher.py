@@ -10,20 +10,20 @@
 import re
 
 def maxSubstrings(word: str) -> int:
-    #return len([ m[0] for m in matchRegex(word) if len(matchRegex(m[0])) == 1 ])
+    return len([ m[0] for m in matchRegex(word) if len(matchRegex(m[0])) == 1 ])
 
-	count = 0
-
-	letters = set(word)
-	while True:
-
-		m = re.search(r'^.{0,}?((.).{2,}?\2)', word)
-		if m == None:
-			return count
-		count += 1
-		print(m.group())
-		word = word[len(m.group()):]
-		print(word)
+	#count = 0
+	#
+	#letters = set(word)
+	#while True:
+	#
+	#	m = re.search(r'^.{0,}?((.).{2,}?\2)', word)
+	#	if m == None:
+	#		return count
+	#	count += 1
+	#	print(m.group())
+	#	word = word[len(m.group()):]
+	#	print(word)
 
 
 def matchRegex(word: str) -> int:

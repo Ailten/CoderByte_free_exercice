@@ -5,7 +5,15 @@
 # make a regex match, who can handle jocker (.) and multiple quantity of last char mentioned (*).
 
 
-# 329/ 354.
+# V0, cleaner vertion (but cheating).
+import re
+class Solution:
+    def isMatch(self, s: str, patern: str) -> bool:
+        return re.search(f'^{patern}$', s) != None
+
+
+
+# V1, not clean. (329/ 354).
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
 
@@ -89,4 +97,76 @@ class Solution:
 
         return i_s == len(s) and i_p == len(p) - 1
             
+
+        
+
+# V2 (more clear to read).
+class Solution:
+    def isMatch(self, s: str, patern: str) -> bool:
+
+        # build an array for the patern.
+        p_arr = [ (
+            patern[i],  # char to find.
+            (i < len(patern) -1 and patern[i+1] == '*'),  # is many quantity (0~n).
+            None  # char catch in string.
+        ) for i in range(len(patern)) if patern[i] != '*' ]
+
+        i_p = 0
+        is_back_tracking = False
+        while True:
+
+            print('---')
+            print('p: '+''.join([ '['+str(e[2] or '')+']' for e in p_arr  ]))
+            print('s: '+s)
+            print(f'i_p: {i_p}')
+
+            if i_p == len(p_arr):
+                if len(s) == 0:
+                    return True
+                is_back_tracking = True
+                i_p -= 1
+                continue
+
+            p = p_arr[i_p]
+
+            char_p = p[0]
+            is_many = p[1]
+            p_taken = p[2]
+
+            # back tracking.
+            if is_back_tracking:
+                if not is_many or p_taken == '':
+                    s = (p_taken or '') + s
+                    p_arr[i_p] = (char_p, is_many, None)
+                    i_p -= 1
+                    if i_p == -1:
+                        return False
+                else:
+                    s = p_taken[len(p_taken)-1] + s
+                    p_arr[i_p] = (char_p, is_many, p_taken[:-1])
+                    is_back_tracking = False
+                    i_p += 1
+                continue
+
+            # take.
+            if not is_many:
+                if (len(s) > 0) and (s[0] == char_p or char_p == '.'):
+                    p_arr[i_p] = (char_p, is_many, s[0])
+                    s = s[1:]
+                    i_p += 1
+                    continue
+                is_back_tracking = True
+                i_p -= 1
+                continue
+            else:
+                taken_cash = ''
+                while len(s) > 0:
+                    if s[0] == char_p or char_p == '.':
+                        taken_cash += s[0]
+                        s = s[1:]
+                        continue
+                    break
+                p_arr[i_p] = (char_p, is_many, taken_cash)
+                i_p += 1
+                continue
 
