@@ -103,3 +103,5 @@ result = weightPath(map)
 print('--- result ---')
 print(result)
 
+
+# can be improve (see logs), with compare last_pos of new_path, with every pos (except last) of all paths paste, by comparing weight (and replace if shortest).
