@@ -20,4 +20,5 @@ def secondDegreeEquation(a: int|float, b: int|float, c: int|float) -> int|float|
 
 # ax² + bx + c = 0
 # find x.
-print(secondDegreeEquation(5, 2, 3))
+print(secondDegreeEquation(5, 2, 3))  # None.
+print(secondDegreeEquation(5, -10, 3))  # (9.1, 40.8)
