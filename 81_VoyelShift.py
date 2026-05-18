@@ -18,5 +18,26 @@ def voyelShift(s: str) -> str:
     
     return s
 
-print(voyelShift('thomas'))
-print(voyelShift('benois'))
+
+def voyelShiftV2(s: str) -> str:
+
+    voyel_shift = {
+        'a': 'e',
+        'e': 'i',
+        'i': 'o',
+        'o': 'u',
+        'u': 'y',
+        'y': 'a'
+    }
+
+    for i in range(len(s)):
+        new_voyel = voyel_shift.get(s[i], None)
+        if new_voyel == None:
+            continue
+        s =  s[:i] + new_voyel + s[i+1:]
+
+    return s
+
+
+print(voyelShiftV2('thomas'))
+print(voyelShiftV2('benois'))
