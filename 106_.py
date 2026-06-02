@@ -2,7 +2,7 @@
 # take a string (repr of an int), invert these digit, and return an array of all digit added.
 
 
-def func(line: str) -> list(str):
+def func(line: str) -> list[str]:
 
     num = int(line)
     num_invert = int(line[::-1])
