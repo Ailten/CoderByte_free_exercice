@@ -54,4 +54,4 @@ def funcV2(map: str, pos_start: tuple):
 print('____________ v2')
 print(funcV2('<vv>^>>v', (0, 0)))
 print('____________')
-print(funcV2('^<^<<<v<vvv>v>>v>>v^>>^>>^>^^^<^<<<v', (0, 0)))
+print(funcV2('^<^<<<v<vvv>v>>v>>v^>>^>>^>^^^<^<<<v', (0, -1)))  # heart.
