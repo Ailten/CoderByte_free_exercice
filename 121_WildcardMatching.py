@@ -3,8 +3,8 @@
 # https://leetcode.com/problems/wildcard-matching/
 
 # dev a patern (regex like) for "?" and "*".
-# "?" == 0 to 1 char.
-# "*" == 0 to N char.
+# "?" == 1 char (any type).
+# "*" == 0 to N char (any type).
 # a char = a char.
 
 
@@ -36,9 +36,10 @@ def func(s: str, pat: str) -> bool:
             match current_pat:
                 case '?':
                     if i_s >= len(s):
-                        group_find = ''
-                    else:
-                        group_find = s[i_s]
+                        is_increasing = False
+                        i -= 1
+                        continue
+                    group_find = s[i_s]
                 case '*':
                     if i_s >= len(s):
                         group_find = ''
@@ -47,7 +48,7 @@ def func(s: str, pat: str) -> bool:
                 case _:
                     if i_s >= len(s) or s[i_s] != current_pat:
                         is_increasing = False
-                        i -= 1
+                        i_pat -= 1
                         continue
                     group_find = s[i_s]
 
@@ -58,13 +59,6 @@ def func(s: str, pat: str) -> bool:
         else:  # decreasing.
 
             match matches[i_pat].pattern:
-                case '?':
-                    if len(matches[i_pat].group) == 1:
-                        matches[i_pat].group = ''
-                        i_s -= 1
-                        is_increasing = True
-                        i_pat += 1
-                        continue
                 case '*':
                     if len(matches[i_pat].group) >= 1:
                         matches[i_pat].group = matches[i_pat].group[:-1]
@@ -84,4 +78,4 @@ def func(s: str, pat: str) -> bool:
             
 print(func('aa', 'a'))  # False.
 print(func('aa', '*'))  # True.
-print(func('aa', '?a'))  # False. (?) debug meaning on exercice description.
+print(func('cb', '?a'))  # False. (?) debug meaning on exercice description.
