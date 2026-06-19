@@ -7,17 +7,20 @@
 
 def my_pow(x: float, n:int) -> float:
 
+    # exeption case.
     if n == 1:
         return x
     if n == 0:
         return 1.0
     
+    # positive case.
     if n > 0:
         output = x
         for _ in range(n - 1):
             output *= x
         return output
     
+    # negative case.
     return 1 / my_pow(x, abs(n))
 
 
