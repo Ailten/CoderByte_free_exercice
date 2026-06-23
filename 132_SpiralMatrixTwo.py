@@ -22,29 +22,40 @@ def func(n: int) -> list[list[int]]:
     if n == 2:
         return m
     
-    x = 0
-    y = 1
-    current_val = m[y][x]
-    direction_index = 0
-    directions = [(1,0),(0,1),(-1,0),(0,-1)]
-    is_last_rotate = False
-    while True:
+    # --> fill by browsing it circulary.
+    #x = 0
+    #y = 1
+    #current_val = m[y][x]
+    #direction_index = 0
+    #directions = [(1,0),(0,1),(-1,0),(0,-1)]
+    #is_last_rotate = False
+    #while True:
+    #
+    #    current_dirtection = directions[direction_index]
+    #    next_x, next_y = (x+current_dirtection[0], y+current_dirtection[1])
+    #    if m[next_y][next_x] != None:  # need rotate direction.
+    #        if is_last_rotate:  # 2 rotate sucessively.
+    #            break  # end loop.
+    #        direction_index = (direction_index + 1) % 4
+    #        is_last_rotate = True
+    #        continue
+    #    is_last_rotate = False
+    #    
+    #    current_val += 1
+    #    x, y = (next_x, next_y)
+    #    m[y][x] = current_val
+    #
+    #return m
 
-        current_dirtection = directions[direction_index]
-        next_x, next_y = (x+current_dirtection[0], y+current_dirtection[1])
-        if m[next_y][next_x] != None:  # need rotate direction.
-            if is_last_rotate:  # 2 rotate sucessively.
-                break  # end loop.
-            direction_index = (direction_index + 1) % 4
-            is_last_rotate = True
-            continue
-        is_last_rotate = False
-        
-        current_val += 1
-        x, y = (next_x, next_y)
-        m[y][x] = current_val
-
+    # fill it recurcively.
+    val_to_add = n*4 - 4
+    center_m = func(n-2)
+    for y in range(len(center_m)):
+        for x in range(len(center_m[y])):
+            m[y+1][x+1] = center_m[y][x] + val_to_add
+    
     return m
+    
 
 
 print('< -- result 1 -- >')
