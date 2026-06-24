@@ -56,3 +56,20 @@ print(func(4,8))  # 2143
 
 
 
+
+print('< demo of memory parameter case >')
+
+def func(edit:bool, my_list: list=[]) -> int:
+    if edit:
+        my_list.append('value')
+    return len(my_list)
+
+print(func(False, []))  # 0.
+print(func(False))  # 0.
+print(func(True))  # 1.
+print(func(False))  # 1.  --> unexpected memory parameter.
+print(func(False, []))  # 0.
+print(func(False))  # 1.  --> default value still edited.
+
+
+
