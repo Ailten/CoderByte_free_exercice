@@ -23,7 +23,7 @@ def func(grid: list[list[int]]) -> int:
         output = 0
         for i in range(len(list_byte)):
             if list_byte[i]:
-                output += 1 << i
+                output |= 1 << i
         return output
     
     def isMatchingOneCount(int_val: int, byte_expected: int, length: int = 8) -> bool:
