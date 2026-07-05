@@ -17,7 +17,7 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
     edit_count = 0
 
     w1_sort = [ (k,ord(c)) for k,c in enumerate(arr_w1) ]
-    w1_sort.sort(key=lambda e: e[1]*1000 + (1000-e[0]))
+    w1_sort.sort(key=lambda e: e[1]*1000 + (1000-e[0]))  # order by letter, (and by index in second time, latest first).
     w2_sort = [ (k,ord(c)) for k,c in enumerate(arr_w2) ]
     w2_sort.sort(key=lambda e: e[1])
 
