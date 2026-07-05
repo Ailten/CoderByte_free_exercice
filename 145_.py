@@ -28,28 +28,30 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
         if w1_i >= len(w1_sort) and w2_i >= len(w2_sort):
             break
 
-        char_w1 = None if w1_i >= len(w1_sort) else w1_sort[w1_i][1]
-        char_w2 = None if w2_i >= len(w2_sort) else w2_sort[w2_i][1]
+        char_w1 = float('inf') if w1_i >= len(w1_sort) else w1_sort[w1_i][1]
+        char_w2 = float('inf') if w2_i >= len(w2_sort) else w2_sort[w2_i][1]
 
         if char_w1 == char_w2:
             w1_i += 1
             w2_i += 1
             continue
-        if char_w2 == None or (char_w1 or float('inf')) < char_w2:  # need pop.
+        if char_w1 < char_w2:  # need pop.
             arr_w1.pop(w1_sort[w1_i][0])
-            w1_i += 1
             w1_sort = [ e if e[0] <= w1_sort[w1_i][0] else (e[0]-1, e[1]) for e in w1_sort ]  # decal all key (before pop).
+            w1_i += 1
             edit_count += 1
             if is_debuging:
                 print(f'remv "{chr(char_w1)}" -> {"".join(arr_w1)}')
-        elif char_w1 == None or char_w1 > char_w2:  # need add.
+            continue
+        if char_w1 > char_w2:  # need add.
             arr_w1.insert(w2_sort[w2_i][0], chr(char_w2))
             w2_i += 1
-            # FIXME.
-            w1_sort = [ e if e[0] < w1_sort[w1_i][0] else (e[0]+1, e[1]) for e in w1_sort ]  # decal all key (before add).
+            if char_w1 != float('inf'):
+                w1_sort = [ e if e[0] < w1_sort[w1_i][0] else (e[0]+1, e[1]) for e in w1_sort ]  # decal all key (before add).
             edit_count += 1
             if is_debuging:
                 print(f'add  "{chr(char_w2)}" -> {"".join(arr_w1)}')
+            continue
 
     w1_char_to_swap = [ (
         k,
@@ -70,6 +72,9 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
         w1_char_to_swap.remove(current_char)
         if is_both_solv:
             w1_char_to_swap.remove(dest)
+        else:
+            dest_i = w1_char_to_swap.index(dest)
+            w1_char_to_swap[dest_i] = (current_char[0], dest[1], dest[2])
         edit_count += 1
         if is_debuging:
             print(f'swap "{current_char[1]}" with "{dest[1]}" -> {"".join(arr_w1)}')
@@ -77,22 +82,17 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
     return edit_count
 
 
-print(func('horse', 'ros', is_debuging=True))
-print(func('intention', 'execution', is_debuging=True))
+#print(func('aaa', 'aaa', is_debuging=True))  # 0.
+#print(func('aaaa', 'aaa', is_debuging=True))  # 1.  (add)
+#print(func('aa', 'aaa', is_debuging=True))  # 1.  (remv)
+#print(func('aab', 'aba', is_debuging=True))  # 1.  (swap)
 
+print(func('horse', 'ros', is_debuging=True))  # 3.
+print(func('intention', 'execution', is_debuging=True))  # 5.
 
-
-
-
-
-# take first char w1.
-# --> did i need this char at this pos ?
-# --> yes, than stay it.
-# --> no, than did I need it at another place ?
-# ----> yes, than ...
-# ------> did the char destination is already take by this same char (than skip it).
-# ------> swap (or mark to swap).
-# ----> no, than pop it.
-
-
-
+#ixnetuceo
+#cxnetuieo
+#exnctuieo
+#exectuino -- x
+#---------
+#execution
