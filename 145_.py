@@ -17,11 +17,12 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
     edit_count = 0
 
     w1_sort = [ (k,ord(c)) for k,c in enumerate(arr_w1) ]
-    w1_sort.sort(key=lambda e: e[1])
+    w1_sort.sort(key=lambda e: e[1]*1000 + (1000-e[0]))
     w2_sort = [ (k,ord(c)) for k,c in enumerate(arr_w2) ]
     w2_sort.sort(key=lambda e: e[1])
 
     # insert and pop.
+    char_to_add = []
     w1_i = 0
     w2_i = 0
     while True:
@@ -44,14 +45,25 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
                 print(f'remv "{chr(char_w1)}" -> {"".join(arr_w1)}')
             continue
         if char_w1 > char_w2:  # need add.
-            arr_w1.insert(w2_sort[w2_i][0], chr(char_w2))
+            char_to_add.append((w2_sort[w2_i][0], chr(char_w2)))
             w2_i += 1
-            if char_w1 != float('inf'):
-                w1_sort = [ e if e[0] < w1_sort[w1_i][0] else (e[0]+1, e[1]) for e in w1_sort ]  # decal all key (before add).
-            edit_count += 1
-            if is_debuging:
-                print(f'add  "{chr(char_w2)}" -> {"".join(arr_w1)}')
             continue
+            #arr_w1.insert(w2_sort[w2_i][0], chr(char_w2))
+            #w2_i += 1
+            #if char_w1 != float('inf'):
+            #    w1_sort = [ e if e[0] < w1_sort[w1_i][0] else (e[0]+1, e[1]) for e in w1_sort ]  # decal all key (before add).
+            #edit_count += 1
+            #if is_debuging:
+            #    print(f'add  "{chr(char_w2)}" -> {"".join(arr_w1)}')
+            #continue
+    
+    # make all add.
+    char_to_add.sort(key=lambda e: e[0])
+    for cta in char_to_add:
+        arr_w1.insert(cta[0], cta[1])
+        edit_count += 1
+        if is_debuging:
+            print(f'add  "{cta[1]}" -> {"".join(arr_w1)}')
 
     w1_char_to_swap = [ (
         k,
@@ -88,11 +100,5 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
 #print(func('aab', 'aba', is_debuging=True))  # 1.  (swap)
 
 print(func('horse', 'ros', is_debuging=True))  # 3.
-print(func('intention', 'execution', is_debuging=True))  # 5.
-
-#ixnetuceo
-#cxnetuieo
-#exnctuieo
-#exectuino -- x
-#---------
-#execution
+print(func('intention', 'execution', is_debuging=True))  # 8.
+print(func('acurate', 'acuchar', is_debuging=True))  # 5.
