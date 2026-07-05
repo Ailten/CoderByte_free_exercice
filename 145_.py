@@ -7,6 +7,7 @@
 # hard way (bonus): replace can only be replace by another char in the current word (swap).
 
 
+# WIP.
 def func(w1:str, w2:str, is_debuging: bool=False) -> int:
 
     # make word as array (easily edited).
@@ -76,9 +77,12 @@ def func(w1:str, w2:str, is_debuging: bool=False) -> int:
     return edit_count
 
 
-
 print(func('horse', 'ros', is_debuging=True))
 print(func('intention', 'execution', is_debuging=True))
+
+
+
+
 
 
 # take first char w1.
@@ -89,3 +93,6 @@ print(func('intention', 'execution', is_debuging=True))
 # ------> did the char destination is already take by this same char (than skip it).
 # ------> swap (or mark to swap).
 # ----> no, than pop it.
+
+
+
