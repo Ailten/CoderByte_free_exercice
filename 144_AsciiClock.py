@@ -68,7 +68,7 @@ class AsciiClock:
         )
 
     def getStrFullClock(self) -> str:
-        clock_size = (11*3, 11)
+        clock_size = (22, 11)
         clock = self.getStrClock(clock_size=clock_size)
         value = self.getStrValue()
         space_value = (clock_size[0] - len(value)) // 2
