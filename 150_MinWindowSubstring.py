@@ -26,46 +26,46 @@ def func(s: str, patern: str) -> str:
                 return False
         return True
 
-    while i < len(s) and j < len(s):
+    while True:
+        if i >= len(s) and j >= len(s):
+            break
         
-        is_j_increase = True
-
         #print('----')
-        #print(dico_browse)
-        #print(dico_pat)
+        #print(f'i:{i}  j:{j}')
+        #print(f'{s[i:j]}')
+
+        is_j_increase = j < len(s)
 
         if is_dict_contains(char_taken, char_ask):
 
             if shortest_match == None or shortest_match[1]-shortest_match[0] > j-i:
                 shortest_match = (i, j)
 
-            is_j_increase = j != i
+            is_j_increase = False
 
-        current_char = None
-        is_add = True
-
-        if is_j_increase and j < len(s)-1:
+        if is_j_increase:
             j += 1
-            current_char = s[j]
-        elif i < len(s)-1:
+            char_taken |= {s[j-1]: char_taken.get(s[j-1], 0) +1}
+        else:
+            char_taken[s[i]] -= 1
             i += 1
-            current_char = s[i]
-            is_add = False
 
-        if current_char in char_ask:
-            if is_add:
-                if current_char in char_taken:
-                    char_taken[current_char] += 1
-                else:
-                    char_taken |= {current_char: 1}
-            else:
-                char_taken[current_char] -= 1
-
-
-    return "" if shortest_match == None else s[shortest_match[0]:shortest_match[j]]
+    return (
+        "" if shortest_match == None else 
+        s[shortest_match[0]:shortest_match[1]]
+    )
 
 
 
-print(func("ADOBECODEBANC", "ABC"))  # "BANK".
+print("-- basic test")
 print(func("A", "A"))  # "A".
-print(func("A", "AA"))  # "".
+print(func("ABCA", "BA"))  # "AB".
+print(func("ADABCDBA", "AC"))  # "ABC".
+print("-- errors test")
+print(func("A", "AA") == "")  # True.
+print(func("", "A") == "")  # True.
+print(func("A", "") == "")  # True.
+print("-- real test")
+print(func("ADOBECODEBANC", "ABC"))  # "BANC".
+print(func(".A.B..AB.A.B.", "AB"))  # "AB".
+print(func(".A.B...B.A..", "ABA"))  # "A.B...B.A".
