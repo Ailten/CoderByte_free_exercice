@@ -33,7 +33,7 @@ print(func([1,1], 0))
 print(func([1,0,1], 0))
 print(func([0,1,1], 0))
 print(func([1,1,0], 0))
-print(func([1,0,1,1], 0))  # not working in this case, FIXME.
+print(func([1,0,1,1], 0))  # not working in this case, FIXME (can be fix by just find the rotate index, un-rotate it, and logN search).
 print(func([0,1,1,1], 0))
 print(func([1,1,0,1], 0))
 print(func([1,1,1,0], 0))
