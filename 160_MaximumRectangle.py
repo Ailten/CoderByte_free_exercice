@@ -78,7 +78,7 @@ def findBigestEra_v2(map: list[list[int]], size_searh: tuple[int, int]|None = No
 #]))
 
 
-# ---> v_2 recurcivity (from bigest expected).
+# ---> v_3 weight cell.
 def findBigestEra_v3(map: list[list[int]], size_searh: tuple[int, int]|None = None) -> int:
 
     for y in range(len(map)):
