@@ -17,7 +17,6 @@ def func(h: ListNode, target: int) -> ListNode:
     
     left = None
     right = None
-    is_after_target = False
     e = h
     first_left = None
     first_right = None
@@ -35,8 +34,7 @@ def func(h: ListNode, target: int) -> ListNode:
             if first_right == None:
                 first_right = right
 
-        # move to next.
-        e = e.next
+        e = e.next # move to next.
 
     # conect both.
     left.next = first_right
