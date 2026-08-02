@@ -75,3 +75,28 @@ def grayCode(n: int) -> list[int]:
 
 
 print(grayCode(2))  # [0,1,3,2]
+# 00
+# 01
+# 11
+# 10
+
+
+# ----> v2
+
+# by switching byte only (with a rule).
+def grayCode_v2(n: int) -> list[int]:
+
+    v = 0
+    output = [v]
+    while True:
+        # TODO.
+        break
+    return output
+
+
+print(grayCode(2))  # [0,1,3,2]
+
+
+
+
+
