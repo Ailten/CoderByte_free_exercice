@@ -6,14 +6,18 @@
 def grayCode(n: int) -> list[int]:
 
     def difBitCount(a: int, b: int, length: int=n) -> int:
+        bit_dif_count = 0
+        for i in range(n):
+            if (a >> i & 1 == 1) ^ (b >> i & 1 == 1):
+                bit_dif_count += 1
+        return bit_dif_count
+
+    def countBit(a: int, length: int=n) -> int:
         bit_count_a = 0
-        bit_count_b = 0
         for i in range(n):
             if a >> i & 1 == 1:
                 bit_count_a += 1
-            if b >> i & 1 == 1:
-                bit_count_b += 1
-        return abs(bit_count_a - bit_count_b)
+        return bit_count_a
     
     def makeHashPath(list_of_elem: list[int], next_elem: int|None = None):
         hash_path = '.'.join([str(e) for e in list_of_elem])
@@ -42,14 +46,14 @@ def grayCode(n: int) -> list[int]:
             continue
 
         if len(vals) == 0:
-            if difBitCount(output[-1], 1) == 0:  # output valid.
+            if countBit(output[-1]) == 1:  # output valid.
                 break
 
             #back_track_count = 1 if not is_back_track else back_track_count + 1
             is_back_track = True
             continue
         
-        next_vals_allowed = [v for v in vals if difBitCount(v, output[-1])]
+        next_vals_allowed = [v for v in vals if difBitCount(v, output[-1]) == 1]
         if len(next_vals_allowed) == 0:
 
             #back_track_count = 1 if not is_back_track else back_track_count + 1
@@ -74,11 +78,20 @@ def grayCode(n: int) -> list[int]:
     return output
 
 
-print(grayCode(2))  # [0,1,3,2]
-# 00
-# 01
-# 11
-# 10
+#print(grayCode(2))  # [0,1,3,2]
+
+#v = 3
+#r = grayCode(v)
+#for e in r:
+#    s = []
+#    for i in range(v):
+#        if e >> i & 1 == 1:
+#            s.append('1')
+#        else:
+#            s.append('0')
+#    print('-' + ''.join(s[::-1]))
+#print(r)
+
 
 
 # ----> v2
@@ -86,15 +99,13 @@ print(grayCode(2))  # [0,1,3,2]
 # by switching byte only (with a rule).
 def grayCode_v2(n: int) -> list[int]:
 
-    v = 0
-    output = [v]
-    while True:
-        # TODO.
-        break
+    output = [0]
+    for i in range(1, 1 << n):
+        output.append(i ^ (i >> 1))
     return output
 
 
-print(grayCode(2))  # [0,1,3,2]
+print(grayCode_v2(2))  # [0,1,3,2]
 
 
 
