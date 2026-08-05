@@ -199,7 +199,7 @@ while True:
     s = Sudoku()
 
     try:
-        s.fillLockNums(42)  # easy.
+        s.fillLockNums(42)  # easy.  # 13'500 try.
     except:
         continue
 
