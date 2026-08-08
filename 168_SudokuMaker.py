@@ -193,6 +193,7 @@ class Sudoku:
 # -----------------> Make.
 
 try_count = 0
+full_fail_count = 0
 while True:
     try_count += 1
 
@@ -211,9 +212,12 @@ while True:
         continue
 
     if not s.verify():
+        full_fail_count += 1
         continue
 
     print(f'try build : {try_count}\n')
+    if full_fail_count > 0:
+        print(f'full fail : {full_fail_count}\n')
 
     print('      Sudoku      ')
     print(sudoku_str)
