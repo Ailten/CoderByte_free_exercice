@@ -41,15 +41,15 @@ class Sudoku:
             
             # get val allows (only).
             val_allow = set(range(1, 10))
-            val_allow -= set([ c.val for c in self.cels[y]])  # line.
-            val_allow -= set([ l[x].val for l in self.cels])  # column.
-            chunk_x = x-(x%3)
+            val_allow -= { c.val for c in self.cels[y] }  # line.
+            val_allow -= { l[x].val for l in self.cels }  # column.
+            chunk_x = x-(x%3) # 0,1,2 -> 0 | 3,4,5 -> 3 | 6,7,8 -> 6
             chunk_y = y-(y%3)
-            val_allow -= set(  # chunk.
-                [ e.val for l in
+            val_allow -= {  # chunk.
+                e.val for l in
                     [ l[chunk_x:chunk_x+3] for k,l in enumerate(self.cels) if k-(k%3) == chunk_y ]
-                for e in l ]
-            )
+                for e in l
+            }
 
             # check.
             if len(val_allow) == 0:
@@ -87,15 +87,15 @@ class Sudoku:
 
             # get val allows (only).
             val_allow = set(range(1, 10))
-            val_allow -= set([ c.val for c in self.cels[y]])  # line.
-            val_allow -= set([ l[x].val for l in self.cels])  # column.
+            val_allow -= { c.val for c in self.cels[y] }  # line.
+            val_allow -= { l[x].val for l in self.cels }  # column.
             chunk_x = x-(x%3)
             chunk_y = y-(y%3)
-            val_allow -= set(  # chunk.
-                [ e.val for l in
+            val_allow -= {  # chunk.
+                e.val for l in
                     [ l[chunk_x:chunk_x+3] for k,l in enumerate(self.cels) if k-(k%3) == chunk_y ]
-                for e in l ]
-            )
+                for e in l
+            }
             val_allow -= set(c.val_try)  # value already try.
 
             # trigger back track (if no path further).
@@ -159,32 +159,23 @@ class Sudoku:
         return sudo_obj
     
     def verify(self) -> bool:
-        for y in range(9):
-            for x in range(9):
-                v = self.cels[y][x]
-                
-                # line.
-                if v in [ c.val for k,c in enumerate(self.cels[y]) if k != x ]:
-                    return False
-                
-                # column.
-                if v in [ l[x].val for k,l in enumerate(self.cels) if k != y ]:
-                    return False
-                
-                # chunk.
-                chunk_x = x-(x%3)
-                chunk_y = y-(y%3)
-                cx = list(range(chunk_x, chunk_x+3))
-                cy = list(range(chunk_y, chunk_y+3))
-                cx.remove(x)
-                cy.remove(y)
-                if (
-                    v == self.cels[cy[0]][cy[0]] or
-                    v == self.cels[cy[0]][cy[1]] or
-                    v == self.cels[cy[1]][cy[0]] or
-                    v == self.cels[cy[1]][cy[1]]
-                ):
-                    return False
+        full_set = set(range(1, 10))
+        for i in range(9):
+
+            if { v.val for v in self.cels[i] } != full_set:  # line.
+                return False
+            if { l[i].val for l in self.cels } != full_set:  # column.
+                return False
+            
+            chunk_x = (i % 3) * 3
+            chunk_y = (i // 3) * 3
+            chunk_vals = {
+                e.val for l in
+                    [ l[chunk_x:chunk_x+3] for k,l in enumerate(self.cels) if k-(k%3) == chunk_y ]
+                for e in l
+            }
+            if chunk_vals != full_set:  # chunk.
+                return False
                 
         return True
 
@@ -224,4 +215,3 @@ while True:
     print('      Solved      ')
     print(s.returnAsStr())
     break
-
