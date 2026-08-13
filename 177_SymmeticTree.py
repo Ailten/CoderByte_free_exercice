@@ -1,8 +1,7 @@
 
-# same tree
-# https://leetcode.com/problems/same-tree/description/
 
-# 100.
+# symmetric tree
+# https://leetcode.com/problems/symmetric-tree/description/
 
 
 
@@ -108,7 +107,7 @@ class TreeNode:
         yield self.left
         yield self.right
 
-    def __eq__(self, b: Optional["TreeNode"]) -> bool:  # can make mistake by needing all operator override.
+    def isEq(self, b: Optional["TreeNode"]) -> bool:
         if b == None:
             return False
         if self.val != b.val:
@@ -132,10 +131,22 @@ class TreeNode:
         return True
 
 
-def isSameTree(p: TreeNode, q: TreeNode) -> bool:
+def isSymmetric(root: TreeNode|None) -> bool:
+    
+    def isBranchSymmetric(l: TreeNode|None, r: TreeNode|None) -> bool:
+        if (l == None) ^ (r == None):
+            return False
+        if l == None and r == None:
+            return True
+        if l.val != r.val:
+            return False
+        return (
+            isBranchSymmetric(l.left, r.right) and  # recurs, both, swap (for symmetric).
+            isBranchSymmetric(l.right, r.left)
+        )
 
-    return p == q
+    return isBranchSymmetric(root.left, root.right)
 
 
-print(isSameTree(TreeNode.fromList([1,2,3]), TreeNode.fromList([1,2,3])))  # True.
-print(isSameTree(TreeNode.fromList([1,2,3]), TreeNode.fromList([1,2,9])))  # False.
+print(isSymmetric(TreeNode.fromList([1,2,2,3,4,4,3])))  # True.
+print(isSymmetric(TreeNode.fromList([1,2,2,None,3,None,3])))  # True.
