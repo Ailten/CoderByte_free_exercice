@@ -71,6 +71,32 @@ class TreeNode:
 
         return l
     
+    def toListByStage(self, is_remove_empty: bool = False) -> list[list[int]]:
+        if self.left == None and self.right == None:
+            return [[self.val]]
+        output: list[list[int]] = [[self.val]]
+        root: list[TreeNode|None] = [self]
+        while True:
+            new_root: list[TreeNode|None] = []
+            for r in root:
+                if r == None:
+                    new_root.append(None)
+                    new_root.append(None)
+                    continue
+                new_root.append(r.left)
+                new_root.append(r.right)
+            new_s: list[str] = []
+            for nr in new_root:
+                if is_remove_empty and nr == None:
+                    continue
+                new_s.append('_' if nr == None else str(nr.val))
+            if len([ e for e in new_s if e != '_']) == 0:
+                break
+            output.append(new_s)
+            root = new_root
+
+        return output
+    
     # for debuging.
     def toStr(self) -> str:
         if self.left == None and self.right == None:
