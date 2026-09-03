@@ -148,3 +148,6 @@ class TreeNode:
             return False
 
         return True
+    
+    def isLastLeaf(self) -> bool:
+        return self.left == None and self.right == None
