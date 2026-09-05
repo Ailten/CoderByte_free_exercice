@@ -9,14 +9,6 @@ from HashableList import HashableList
 
 def numDistinct(s: str, t: str) -> int:
 
-    # not working well (fixme: allow overlaping match).
-    # maybe, need sanitise the special char from t.
-    #re_t = '.*?'.join(list(t))
-    #matches = re.findall(f'(?=({re_t}))', s)
-    #print(f'(?={re_t})')
-    #print(matches)
-    #return len(matches)
-
     match_browse: set[HashableList[int]] = set()
     for t_i in range(len(t)):
         letter_t = t[t_i]
