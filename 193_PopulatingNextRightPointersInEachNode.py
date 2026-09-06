@@ -2,6 +2,8 @@
 # Populating next right pointers in each node
 # https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
 
+# solv 117 to.
+
 
 class Node:
     def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
