@@ -26,8 +26,14 @@ class ListNode:
         l = []
         h = self
 
+        count_loop = 0
+
         while h != None:
             l.append(h.val)
             h = h.next
+
+            count_loop += 1
+            if count_loop >= 100:  # limit can be edited
+                raise Exception("Loop ListNode exceed limite (verify infinit loop)")
 
         return l
